@@ -1,0 +1,77 @@
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+}
+
+#body-parts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2rem;
+    min-height: 10rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #bc4e9c;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+#word-display {
+    font-size: 2rem;
+    letter-spacing: 5px;
+    margin: 20px 0;
+}
+
+#guess-input {
+    margin-top: 20px;
+}
+
+#letter-input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #f80759;
+    border-radius: 5px;
+    width: 20%;
+    margin-right: 10px;
+}
+
+#guess-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: #f80759;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#guess-button:hover {
+    background-color: #bc4e9c;
+}
+
+#guess-message {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #bc4e9c;
+    min-height: 1.5rem;
+    transition: color 0.3s ease;
+}
+#guess-message.correct {
+    color: #28a745;
+}
+#guess-message.incorrect {
+    color: #dc3545;
+}
+#guess-message.warning {
+    color: #ffc107;
+}

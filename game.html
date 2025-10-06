@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS195 Project 01 - Game</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div id="info">
+        <h1>Hangman Game</h1>
+        <h2>Guess the word by suggesting letters!</h2>
+
+        <p>Incorrect Guesses: <span id="incorrect-guesses">0</span> | Incorrect Letters: <span id="incorrect-letters"></span></p>
+    </div>
+
+    <div id="game-container">
+        <div id="body-parts">
+            <!-- Body parts will be displayed here -->
+        </div>
+        <div id="word-display">
+            <!-- Word display will be shown here -->
+        </div>
+        <div id="guess-input">
+            <input type="text" id="letter-input" maxlength="1" placeholder="Enter a letter" />
+            <button id="guess-button">Guess</button>
+        </div>
+        <div id="guess-message">
+            <!-- Guess related messages will be shown here -->
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
