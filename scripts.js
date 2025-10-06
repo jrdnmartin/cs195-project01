@@ -27,7 +27,7 @@ function handleGuess() {
         return;
     }
 
-    if (guess === '') {
+    if (guess === '' || !/^[a-z]$/.test(guess)) {
         guessMessage.textContent = 'Please enter a valid letter.';
         guessMessage.classList.add('warning');
         return;
@@ -42,20 +42,37 @@ function handleGuess() {
         incorrectGuesses++;
         guessMessage.textContent = `Sorry, the letter "${guess}" is not in the word.`;
         guessMessage.classList.add('incorrect');
-        document.getElementById('incorrect-letters').textContent = guessedLetters.join(', ');
+        
+        const incorrectLetters = guessedLetters.filter(letter => !targetWord.includes(letter));
+        document.getElementById('incorrect-letters').textContent = incorrectLetters.join(', ');
     }
 
     updateDisplay();
 }
 
 function checkGameOver() {
-    if (incorrectGuesses >= maxIncorrectGuesses) {
-        alert(`Game Over! The word was "${targetWord}".`);
-        resetGame();
-    } else if (targetWord.split('').every(letter => guessedLetters.includes(letter))) {
-        alert('Congratulations! You guessed the word!');
-        resetGame();
+    if (targetWord.split('').every(letter => guessedLetters.includes(letter))) {
+        showGameAlert('Congratulations! You won!', targetWord);
+        return true;
     }
+    
+    if (incorrectGuesses >= maxIncorrectGuesses) {
+        showGameAlert('Game Over! You lost!', targetWord);
+        return true;
+    }
+    
+    return false;
+}
+
+function showGameAlert(message, word) {
+    const alert = document.getElementById('game-alert');
+    const alertMessage = document.getElementById('alert-message');
+    const alertWord = document.getElementById('alert-word');
+
+    alertMessage.textContent = message;
+    alertWord.textContent = word;
+
+    alert.classList.remove('hidden');
 }
 
 function resetGame() {
@@ -63,14 +80,31 @@ function resetGame() {
     incorrectGuesses = 0;
     targetWord = wordsList[Math.floor(Math.random() * wordsList.length)];
     document.getElementById('incorrect-letters').textContent = '';
+    
     const guessMessage = document.getElementById('guess-message');
     guessMessage.textContent = '';
     guessMessage.className = '';
+
+    const alert = document.getElementById('game-alert');
+    alert.classList.add('hidden');
+    
     updateDisplay();
 }
+
+document.getElementById('play-again-button').addEventListener('click', () => {
+    resetGame();
+});
 
 document.getElementById('guess-button').addEventListener('click', () => {
     handleGuess();
     checkGameOver();
 });
+
+document.getElementById('letter-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        handleGuess();
+        checkGameOver();
+    }
+});
+
 updateDisplay();
